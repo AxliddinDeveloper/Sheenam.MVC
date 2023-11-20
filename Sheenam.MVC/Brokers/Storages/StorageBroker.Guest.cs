@@ -22,5 +22,8 @@ namespace Sheenam.MVC.Brokers.Storages
 
         public ValueTask<Guest> UpdateGuestAsync(Guest guest) =>
             UpdateGuestAsync(guest);
+
+        public ValueTask<Guest> DeleteGuestAsync(Guest guest) =>
+            DeleteGuestAsync(guest);
     }
 }
