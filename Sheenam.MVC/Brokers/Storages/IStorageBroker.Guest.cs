@@ -12,8 +12,8 @@ namespace Sheenam.MVC.Brokers.Storages
     public partial interface IStorageBroker
     {
         ValueTask<Guest>  InsertGuestAsync(Guest guest);
-        IQueryable<Guest> SelectAllGuestsAsync(Guest guest);
+        IQueryable<Guest> SelectAllGuestsAsync();
         ValueTask<Guest> UpdateGuestAsync(Guest guest);
-
+        ValueTask<Guest> DeleteGuestAsync(Guest guest);
     }
 }
