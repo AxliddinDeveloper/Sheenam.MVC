@@ -3,6 +3,7 @@
 // Powering True Leadership
 //===========================
 
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Sheenam.MVC.Models.Foundations.Guests;
@@ -15,5 +16,9 @@ namespace Sheenam.MVC.Brokers.Storages
 
         public async ValueTask<Guest> InsertGuestAsync(Guest guest) =>
             await InsertGuestAsync(guest);
+
+        public IQueryable<Guest> SelectAllGuestsAsync() =>
+            SelectAllGuestsAsync();
+
     }
 }
