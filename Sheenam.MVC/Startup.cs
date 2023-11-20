@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Sheenam.MVC.Brokers.Loggings;
 using Sheenam.MVC.Brokers.Storages;
 
 namespace Sheenam.MVC
@@ -23,7 +24,13 @@ namespace Sheenam.MVC
         {
             services.AddControllersWithViews();
             services.AddDbContext<StorageBroker>();
+            Brokers(services);
+        }
+
+        private static void Brokers(IServiceCollection services)
+        {
             services.AddTransient<IStoragebroker, StorageBroker>();
+            services.AddTransient<ILoggingBroker, ILoggingBroker>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
