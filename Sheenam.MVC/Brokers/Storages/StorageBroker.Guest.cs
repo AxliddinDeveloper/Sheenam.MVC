@@ -20,5 +20,7 @@ namespace Sheenam.MVC.Brokers.Storages
         public IQueryable<Guest> SelectAllGuestsAsync() =>
             SelectAllGuestsAsync();
 
+        public ValueTask<Guest> UpdateGuestAsync(Guest guest) =>
+            UpdateGuestAsync(guest);
     }
 }
