@@ -3,6 +3,7 @@
 // Powering True Leadership
 //===========================
 
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -15,15 +16,16 @@ namespace Sheenam.MVC.Brokers.Storages
         public DbSet<Guest> Guests { get; set; }
 
         public async ValueTask<Guest> InsertGuestAsync(Guest guest) =>
-            await InsertGuestAsync(guest);
+            await InsertAsync(guest);
 
-        public IQueryable<Guest> SelectAllGuestsAsync() =>
-            SelectAllGuestsAsync();
-
+        public IQueryable<Guest> SelectAllGuests() =>
+            SelectAll<Guest>();
+        public ValueTask<Guest> SelectGuestByIdAsync(Guid id) =>
+            SelectAsync<Guest>(id);
         public ValueTask<Guest> UpdateGuestAsync(Guest guest) =>
-            UpdateGuestAsync(guest);
+            UpdateAsync<Guest>(guest);
 
         public ValueTask<Guest> DeleteGuestAsync(Guest guest) =>
-            DeleteGuestAsync(guest);
+            DeleteAsync<Guest>(guest);
     }
 }
