@@ -3,12 +3,12 @@
 // Powering True Leadership
 //===========================
 
+using System.Linq;
+using System.Threading.Tasks;
+using EFxceptions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System.Threading.Tasks;
-using EFxceptions;
-using System.Linq;
 
 namespace Sheenam.MVC.Brokers.Storages
 {
