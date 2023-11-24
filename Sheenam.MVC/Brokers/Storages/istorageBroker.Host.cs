@@ -3,14 +3,14 @@
 // Powering True Leadership
 //===========================
 
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using System;
 using Sheenam.MVC.Models.Foundations.Hosts;
 
 namespace Sheenam.MVC.Brokers.Storages
 {
-    public partial  interface IStorageBroker
+    public partial interface IStorageBroker
     {
         ValueTask<Host> InsertHostAsync(Host host);
         IQueryable<Host> SelectAllHosts();

@@ -12,7 +12,7 @@ namespace Sheenam.MVC.Brokers.Storages
 {
     public partial interface IStorageBroker
     {
-        ValueTask<Guest>  InsertGuestAsync(Guest guest);
+        ValueTask<Guest> InsertGuestAsync(Guest guest);
         IQueryable<Guest> SelectAllGuests();
         ValueTask<Guest> SelectGuestByIdAsync(Guid id);
         ValueTask<Guest> UpdateGuestAsync(Guest guest);
