@@ -20,18 +20,22 @@ namespace Sheenam.MVC.Services.Foundations.Guests
 
         public async ValueTask<Guest> AddGuestAsync(Guest guest) =>
             await this.storageBroker.InsertGuestAsync(guest);
+
+        public IQueryable<Guest> RetrieveAllGuests() =>
+            this.storageBroker.SelectAllGuests();
             
+        public async ValueTask<Guest> RetrieveGuestByIdAsync(Guid Id) =>
+            await this.storageBroker.SelectGuestByIdAsync(Id);
 
         public async ValueTask<Guest> ModifyGuestAsync(Guest guest) =>
             await this.storageBroker.UpdateGuestAsync(guest);
 
-        public async ValueTask<Guest> RemoveGuestAsync(Guest guest) =>
-            await this.storageBroker.DeleteGuestAsync(guest);
+        public async ValueTask<Guest> RemoveGuestByIdAsync(Guid id)
+        {
+            Guest mayBeGuest = await this.RetrieveGuestByIdAsync(id);
 
-        public IQueryable<Guest> RetrieveAllGuests() =>
-            this.storageBroker.SelectAllGuests();
-
-        public async ValueTask<Guest> RetrieveGuestByIdAsync(Guid Id) =>
-            await this.storageBroker.SelectGuestByIdAsync(Id);
+            await this.storageBroker.DeleteGuestAsync(mayBeGuest);
+            throw new NullReferenceException();
+        }
     }
 }
