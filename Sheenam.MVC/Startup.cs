@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Sheenam.MVC.Brokers.Storages;
+using Sheenam.MVC.Services.Foundations.Guests;
 
 namespace Sheenam.MVC
 {
@@ -23,6 +24,7 @@ namespace Sheenam.MVC
         {
             services.AddControllersWithViews();
             services.AddDbContext<StorageBroker>();
+            services.AddTransient<IGuestService, GuestService>();
             Brokers(services);
         }
 
