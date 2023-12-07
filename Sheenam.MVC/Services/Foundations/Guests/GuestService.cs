@@ -34,8 +34,7 @@ namespace Sheenam.MVC.Services.Foundations.Guests
         {
             Guest mayBeGuest = await this.RetrieveGuestByIdAsync(id);
 
-            await this.storageBroker.DeleteGuestAsync(mayBeGuest);
-            throw new NullReferenceException();
+            return await this.storageBroker.DeleteGuestAsync(mayBeGuest);
         }
     }
 }
