@@ -19,7 +19,7 @@ namespace Sheenam.MVC.Services.Foundations.Guests
         }
 
         public async ValueTask<Guest> AddGuestAsync(Guest guest) =>
-            throw new NullReferenceException();
+            await this.storageBroker.InsertGuestAsync(guest);
             
 
         public async ValueTask<Guest> ModifyGuestAsync(Guest guest) =>
