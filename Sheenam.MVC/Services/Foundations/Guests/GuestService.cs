@@ -23,12 +23,14 @@ namespace Sheenam.MVC.Services.Foundations.Guests
 
         public IQueryable<Guest> RetrieveAllGuests() =>
             this.storageBroker.SelectAllGuests();
-            
+
         public async ValueTask<Guest> RetrieveGuestByIdAsync(Guid Id) =>
-            throw new NullReferenceException();
+            await this.storageBroker.SelectGuestByIdAsync(Id);
 
         public async ValueTask<Guest> ModifyGuestAsync(Guest guest)
         {
+            await this.storageBroker.SelectGuestByIdAsync(guest.Id);
+
             return await this.storageBroker.UpdateGuestAsync(guest);
         }
 
