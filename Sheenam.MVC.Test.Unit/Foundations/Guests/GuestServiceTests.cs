@@ -3,12 +3,15 @@
 // Powering True Leadership
 //===========================
 
+using System.Linq.Expressions;
+using System;
 using Moq;
 using Sheenam.MVC.Brokers.Loggings;
 using Sheenam.MVC.Brokers.Storages;
 using Sheenam.MVC.Models.Foundations.Guests;
 using Sheenam.MVC.Services.Foundations.Guests;
 using Tynamix.ObjectFiller;
+using Xeptions;
 
 namespace Sheenam.MVC.Test.Unit.Foundations.Guests
 {
@@ -33,5 +36,8 @@ namespace Sheenam.MVC.Test.Unit.Foundations.Guests
 
         private static Filler<Guest> CreateGuestFiller() =>
             new Filler<Guest>();
+
+        private Expression<Func<Xeption, bool>> SameExceptionAs(Xeption expectedExceptoin) =>
+            actualException => actualException.SameExceptionAs(expectedExceptoin);
     }
 }
