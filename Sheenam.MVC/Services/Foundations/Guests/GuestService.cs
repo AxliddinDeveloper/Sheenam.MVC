@@ -25,7 +25,7 @@ namespace Sheenam.MVC.Services.Foundations.Guests
             this.storageBroker.SelectAllGuests();
             
         public async ValueTask<Guest> RetrieveGuestByIdAsync(Guid Id) =>
-            await this.storageBroker.SelectGuestByIdAsync(Id);
+            throw new NullReferenceException();
 
         public async ValueTask<Guest> ModifyGuestAsync(Guest guest)
         {
