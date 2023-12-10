@@ -34,7 +34,7 @@ namespace Sheenam.MVC.Services.Foundations.Guests
 
         public async ValueTask<Guest> RemoveGuestByIdAsync(Guid id)
         {
-            Guest mayBeGuest = await this.RetrieveGuestByIdAsync(id);
+            Guest mayBeGuest = await this.storageBroker.SelectGuestByIdAsync(id);
 
             return await this.storageBroker.DeleteGuestAsync(mayBeGuest);
         }
