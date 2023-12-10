@@ -27,8 +27,10 @@ namespace Sheenam.MVC.Services.Foundations.Guests
         public async ValueTask<Guest> RetrieveGuestByIdAsync(Guid Id) =>
             await this.storageBroker.SelectGuestByIdAsync(Id);
 
-        public async ValueTask<Guest> ModifyGuestAsync(Guest guest) =>
-            await this.storageBroker.UpdateGuestAsync(guest);
+        public async ValueTask<Guest> ModifyGuestAsync(Guest guest)
+        {
+            return await this.storageBroker.UpdateGuestAsync(guest);
+        }
 
         public async ValueTask<Guest> RemoveGuestByIdAsync(Guid id)
         {
