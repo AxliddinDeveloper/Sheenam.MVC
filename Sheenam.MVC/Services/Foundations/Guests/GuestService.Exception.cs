@@ -29,6 +29,10 @@ namespace Sheenam.MVC.Services.Foundations.Guests
             {
                 throw CreateAndLogValidationException(invalidGuestException);
             }
+            catch (NotFoundGuestException notFoundGuestException)
+            {
+                throw CreateAndLogValidationException(notFoundGuestException);
+            }
         }
 
         private GuestValidationException CreateAndLogValidationException(Xeption exception)
