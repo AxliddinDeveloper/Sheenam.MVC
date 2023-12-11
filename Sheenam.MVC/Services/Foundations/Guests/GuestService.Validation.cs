@@ -21,6 +21,14 @@ namespace Sheenam.MVC.Services.Foundations.Guests
         private void ValidateGuestId(Guid guestId) =>
             Validate((Rule: IsInvalid(guestId), Parameter: nameof(Guest.Id)));
 
+        private static void ValidateStorageGuestExists(Guest maybeGuest, Guid guestId)
+        {
+            if (maybeGuest is null)
+            {
+                throw new NotFoundGuestException(guestId);
+            }
+        }
+
         private static dynamic IsInvalid(Guid id) => new
         {
             Condition = id == default,
