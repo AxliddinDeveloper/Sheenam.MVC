@@ -1,4 +1,9 @@
-﻿using Xeptions;
+﻿//===========================
+// Copyright (c) Tarteeb LLC
+// Powering True Leadership
+//===========================
+
+using Xeptions;
 
 namespace Sheenam.MVC.Models.Foundations.Guests.Exceptions
 {

@@ -7,7 +7,7 @@ using Sheenam.MVC.Models.Foundations.Guests;
 
 namespace Sheenam.MVC.Services.Foundations.Guests
 {
-    public class GuestService : IGuestService
+    public partial class GuestService : IGuestService
     {
         private readonly IStorageBroker storageBroker;
         private readonly ILoggingBroker loggingBroker;
@@ -18,8 +18,11 @@ namespace Sheenam.MVC.Services.Foundations.Guests
             this.loggingBroker = loggingBroker;
         }
 
-        public async ValueTask<Guest> AddGuestAsync(Guest guest) =>
-            await this.storageBroker.InsertGuestAsync(guest);
+        public ValueTask<Guest> AddGuestAsync(Guest guest) =>
+        TryCatch(async () =>
+        {
+            return await this.storageBroker.InsertGuestAsync(guest);
+        });
 
         public IQueryable<Guest> RetrieveAllGuests() =>
             this.storageBroker.SelectAllGuests();

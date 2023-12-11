@@ -7,10 +7,10 @@ using Xeptions;
 
 namespace Sheenam.MVC.Models.Foundations.Guests.Exceptions
 {
-    public class GuestValidationException : Xeption
+    public class InvalidGuestExcpetion : Xeption
     {
-        public GuestValidationException(Xeption innerException)
-    : base(message: "Guest validation error occured, fix the errors and try again.", innerException)
+        public InvalidGuestExcpetion()
+    : base(message: "Guest is invalid.")
         { }
     }
 }
