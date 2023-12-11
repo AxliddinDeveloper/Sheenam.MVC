@@ -27,7 +27,7 @@ namespace Sheenam.MVC.Services.Foundations.Guests
             }
             catch (InvalidGuestExcpetion invalidGuestException)
             {
-                throw new NullReferenceException();
+                throw CreateAndLogValidationException(invalidGuestException);
             }
         }
 
