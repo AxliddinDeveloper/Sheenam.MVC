@@ -3,6 +3,7 @@
 // Powering True Leadership
 //===========================
 
+using System;
 using System.Threading.Tasks;
 using Sheenam.MVC.Models.Foundations.Guests;
 using Sheenam.MVC.Models.Foundations.Guests.Exceptions;
@@ -26,7 +27,7 @@ namespace Sheenam.MVC.Services.Foundations.Guests
             }
             catch (InvalidGuestExcpetion invalidGuestException)
             {
-                throw CreateAndLogValidationException(invalidGuestException);
+                throw new NullReferenceException();
             }
         }
 
