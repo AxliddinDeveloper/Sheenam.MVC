@@ -1,4 +1,9 @@
-﻿using System;
+﻿//===========================
+// Copyright (c) Tarteeb LLC
+// Powering True Leadership
+//===========================
+
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Sheenam.MVC.Brokers.Loggings;
@@ -42,12 +47,18 @@ namespace Sheenam.MVC.Services.Foundations.Guests
             return maybeGuest;
         });
 
-        public async ValueTask<Guest> ModifyGuestAsync(Guest guest)
+        public ValueTask<Guest> ModifyGuestAsync(Guest guest) =>
+         TryCatch(async () =>
         {
-            await this.storageBroker.SelectGuestByIdAsync(guest.Id);
+            ValidateGuestOnModify(guest);
+
+            Guest mayBeGuest = 
+                await this.storageBroker.SelectGuestByIdAsync(guest.Id);
+
+            ValidateAgainstStorageGuestOnModify(inputGuest: guest, storageGuest: mayBeGuest);
 
             return await this.storageBroker.UpdateGuestAsync(guest);
-        }
+        });
 
         public async ValueTask<Guest> RemoveGuestByIdAsync(Guid id)
         {

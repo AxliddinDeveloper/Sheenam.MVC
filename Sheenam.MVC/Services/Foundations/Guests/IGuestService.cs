@@ -1,4 +1,9 @@
-﻿using Sheenam.MVC.Models.Foundations.Guests;
+﻿//===========================
+// Copyright (c) Tarteeb LLC
+// Powering True Leadership
+//===========================
+
+using Sheenam.MVC.Models.Foundations.Guests;
 using System.Linq;
 using System;
 using System.Threading.Tasks;
