@@ -98,10 +98,12 @@ namespace Sheenam.MVC.Test.Unit.Foundations.Guests
 
             this.loggingBrokerMock.Verify(broker =>
                 broker.LogError(It.Is(SameExceptionAs(
-                    expectedGuestValidationException))), Times.Once);
+                    expectedGuestValidationException))), 
+                        Times.Once);
 
             this.storageBrokerMock.Verify(broker =>
-                broker.UpdateGuestAsync(It.IsAny<Guest>()), Times.Never);
+                broker.UpdateGuestAsync(It.IsAny<Guest>()), 
+                    Times.Never);
 
             this.loggingBrokerMock.VerifyNoOtherCalls();
             this.storageBrokerMock.VerifyNoOtherCalls();
