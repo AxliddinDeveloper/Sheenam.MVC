@@ -12,6 +12,8 @@ using Sheenam.MVC.Models.Foundations.Guests;
 using Sheenam.MVC.Services.Foundations.Guests;
 using Tynamix.ObjectFiller;
 using Xeptions;
+using Microsoft.Data.SqlClient;
+using System.Runtime.Serialization;
 
 namespace Sheenam.MVC.Test.Unit.Foundations.Guests
 {
@@ -34,10 +36,13 @@ namespace Sheenam.MVC.Test.Unit.Foundations.Guests
         private static Guest CreateRandomGuest() =>
             CreateGuestFiller().Create();
 
-        private static Filler<Guest> CreateGuestFiller() =>
-            new Filler<Guest>();
+        private static SqlException CreateSqlException() =>
+            (SqlException)FormatterServices.GetUninitializedObject(typeof(SqlException));
 
         private Expression<Func<Xeption, bool>> SameExceptionAs(Xeption expectedExceptoin) =>
             actualException => actualException.SameExceptionAs(expectedExceptoin);
+
+        private static Filler<Guest> CreateGuestFiller() =>
+            new Filler<Guest>();
     }
 }
