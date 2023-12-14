@@ -4,6 +4,7 @@
 //===========================
 
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 using Sheenam.MVC.Models.Foundations.Guests;
 using Sheenam.MVC.Models.Foundations.Guests.Exceptions;
 using Xeptions;
@@ -14,11 +15,11 @@ namespace Sheenam.MVC.Services.Foundations.Guests
     {
         private delegate ValueTask<Guest> ReturningGuestFunction();
 
-        private async ValueTask<Guest> TryCatch(ReturningGuestFunction returningTeamFunction)
+        private async ValueTask<Guest> TryCatch(ReturningGuestFunction returningGuestFunction)
         {
             try
             {
-                return await returningTeamFunction();
+                return await returningGuestFunction();
             }
             catch (NullGuestException nullGuestExcpetion)
             {
@@ -32,6 +33,12 @@ namespace Sheenam.MVC.Services.Foundations.Guests
             {
                 throw CreateAndLogValidationException(notFoundGuestException);
             }
+            catch (SqlException sqlException)
+            {
+                var failedGuestStorageException = new FailedGuestStorageException(sqlException);
+
+                throw CreateAndLogCriticalDependencyException(failedGuestStorageException);
+            }
         }
 
         private GuestValidationException CreateAndLogValidationException(Xeption exception)
@@ -40,6 +47,14 @@ namespace Sheenam.MVC.Services.Foundations.Guests
             this.loggingBroker.LogError(guestValidationExpcetion);
 
             return guestValidationExpcetion;
+        }
+
+        private GuestDependencyException CreateAndLogCriticalDependencyException(Xeption exception)
+        {
+            var guestDependencyException = new GuestDependencyException(exception);
+            this.loggingBroker.LogCritical(guestDependencyException);
+
+            return guestDependencyException;
         }
     }
 }
