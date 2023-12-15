@@ -3,13 +3,13 @@
 // Powering True Leadership
 //===========================
 
-using System;
-using System.Threading.Tasks;
-using FluentAssertions;
 using Moq;
-using Sheenam.MVC.Models.Foundations.Guests;
-using Sheenam.MVC.Models.Foundations.Guests.Exceptions;
+using System.Threading.Tasks;
+using System;
 using Xunit;
+using Sheenam.MVC.Models.Foundations.Guests.Exceptions;
+using Sheenam.MVC.Models.Foundations.Guests;
+using FluentAssertions;
 
 namespace Sheenam.MVC.Test.Unit.Foundations.Guests
 {

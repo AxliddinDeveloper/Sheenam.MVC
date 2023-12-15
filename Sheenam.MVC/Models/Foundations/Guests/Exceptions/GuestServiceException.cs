@@ -12,6 +12,6 @@ namespace Sheenam.MVC.Models.Foundations.Guests.Exceptions
     {
         public GuestServiceException(Exception innerException)
             : base(message: "Guest service error occurred, contact support.", innerException)
-        { }
+        {}
     }
 }

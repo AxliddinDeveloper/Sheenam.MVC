@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Sheenam.MVC.Brokers.Storages
 {
-    public partial interface IStoragebroker
+    public partial interface IStorageBroker
     {
         ValueTask<T> InsertAsync<T>(T @object);
 

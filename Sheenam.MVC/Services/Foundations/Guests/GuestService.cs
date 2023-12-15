@@ -52,7 +52,7 @@ namespace Sheenam.MVC.Services.Foundations.Guests
         {
             ValidateGuestOnModify(guest);
 
-            Guest mayBeGuest =
+            Guest mayBeGuest = 
                 await this.storageBroker.SelectGuestByIdAsync(guest.Id);
 
             ValidateAgainstStorageGuestOnModify(inputGuest: guest, storageGuest: mayBeGuest);

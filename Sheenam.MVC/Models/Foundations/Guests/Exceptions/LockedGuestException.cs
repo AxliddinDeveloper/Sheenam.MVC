@@ -11,7 +11,7 @@ namespace Sheenam.MVC.Models.Foundations.Guests.Exceptions
     public class LockedGuestException : Xeption
     {
         public LockedGuestException(Exception innerException)
-            : base(message: "Guest is locked, please try again.", innerException)
+            : base (message: "Guest is locked, please try again.", innerException)
         { }
     }
 }

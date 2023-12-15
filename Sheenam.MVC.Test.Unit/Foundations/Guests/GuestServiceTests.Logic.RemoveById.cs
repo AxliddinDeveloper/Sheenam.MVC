@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Moq;
 using System.Threading.Tasks;
-using FluentAssertions;
-using Force.DeepCloner;
-using Moq;
-using Sheenam.MVC.Models.Foundations.Guests;
+using System;
 using Xunit;
+using Sheenam.MVC.Models.Foundations.Guests;
+using Force.DeepCloner;
+using FluentAssertions;
 
 namespace Sheenam.MVC.Test.Unit.Foundations.Guests
 {
