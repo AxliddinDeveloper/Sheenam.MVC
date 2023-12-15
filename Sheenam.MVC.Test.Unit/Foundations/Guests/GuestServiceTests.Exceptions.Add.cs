@@ -63,6 +63,9 @@ namespace Sheenam.MVC.Test.Unit.Foundations.Guests
             var expectedGuestDependencyValidationException =
                 new GuestDependencyValidationException(alreadyExistsGuestException);
 
+            this.storageBrokerMock.Setup(broker => 
+                broker.InsertGuestAsync(someGuest)).ThrowsAsync(duplicateKeyException);
+
             // when
             ValueTask<Guest> addGuestTask = this.guestService.AddGuestAsync(someGuest);
 
@@ -77,7 +80,7 @@ namespace Sheenam.MVC.Test.Unit.Foundations.Guests
                 expectedGuestDependencyValidationException))), Times.Once);
 
             this.storageBrokerMock.Verify(broker => broker.InsertGuestAsync(
-               It.IsAny<Guest>()), Times.Never);
+               It.IsAny<Guest>()), Times.Once);
 
             this.loggingBrokerMock.VerifyNoOtherCalls();
             this.storageBrokerMock.VerifyNoOtherCalls();
