@@ -6,6 +6,7 @@
 using System.Threading.Tasks;
 using EFxceptions.Models.Exceptions;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Sheenam.MVC.Models.Foundations.Guests;
 using Sheenam.MVC.Models.Foundations.Guests.Exceptions;
 using Xeptions;
@@ -45,6 +46,12 @@ namespace Sheenam.MVC.Services.Foundations.Guests
                 var alreadyExistsGuestException = new AlreadyExistsGuestException(duplicateKeyException);
 
                 throw CreateAndDependencyValidationException(alreadyExistsGuestException);
+            }
+            catch (DbUpdateConcurrencyException dbUpdateConcurrencyException)
+            {
+                var lockedGuestException = new LockedGuestException(dbUpdateConcurrencyException);
+
+                throw CreateAndDependencyValidationException(lockedGuestException);
             }
         }
 
