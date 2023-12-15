@@ -33,6 +33,9 @@ namespace Sheenam.MVC.Test.Unit.Foundations.Guests
                 loggingBroker: this.loggingBrokerMock.Object);
         }
 
+        private static string GetRandomString() =>
+            new MnemonicString().GetValue();
+
         private static Guest CreateRandomGuest() =>
             CreateGuestFiller().Create();
 
