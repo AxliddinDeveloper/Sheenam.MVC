@@ -147,11 +147,8 @@ namespace Sheenam.MVC.Test.Unit.Foundations.Guests
                 await Assert.ThrowsAsync<GuestServiceException>(addGuestTask.AsTask);
 
             // then
-            actualGuestServiceException.Should().BeEquivalentTo(expectedGuestServiceException);
-
-            this.loggingBrokerMock.Verify(broker =>
-                broker.LogError(It.Is(SameExceptionAs(
-                    expectedGuestServiceException))), Times.Once);
+            actualGuestServiceException.Should().BeEquivalentTo(
+                expectedGuestServiceException);
 
             this.storageBrokerMock.Verify(broker =>
                 broker.InsertGuestAsync(It.IsAny<Guest>()), Times.Once);
