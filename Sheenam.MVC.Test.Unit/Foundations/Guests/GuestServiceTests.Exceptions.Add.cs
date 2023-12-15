@@ -3,6 +3,8 @@
 // Powering True Leadership
 //===========================
 
+using System;
+using System.Threading.Tasks;
 using EFxceptions.Models.Exceptions;
 using FluentAssertions;
 using Microsoft.Data.SqlClient;
@@ -10,8 +12,6 @@ using Microsoft.EntityFrameworkCore;
 using Moq;
 using Sheenam.MVC.Models.Foundations.Guests;
 using Sheenam.MVC.Models.Foundations.Guests.Exceptions;
-using System;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Sheenam.MVC.Test.Unit.Foundations.Guests
@@ -65,7 +65,7 @@ namespace Sheenam.MVC.Test.Unit.Foundations.Guests
             var expectedGuestDependencyValidationException =
                 new GuestDependencyValidationException(alreadyExistsGuestException);
 
-            this.storageBrokerMock.Setup(broker => 
+            this.storageBrokerMock.Setup(broker =>
                 broker.InsertGuestAsync(someGuest)).ThrowsAsync(duplicateKeyException);
 
             // when
@@ -113,7 +113,7 @@ namespace Sheenam.MVC.Test.Unit.Foundations.Guests
                 .BeEquivalentTo(expectedGuestDependencyValidationException);
 
             this.loggingBrokerMock.Verify(broker => broker.LogError(It.Is(
-                SameExceptionAs(expectedGuestDependencyValidationException))), 
+                SameExceptionAs(expectedGuestDependencyValidationException))),
                     Times.Once);
 
             this.storageBrokerMock.Verify(broker =>

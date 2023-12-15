@@ -3,11 +3,11 @@
 // Powering True Leadership
 //===========================
 
+using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
 using Sheenam.MVC.Models.Foundations.Guests;
 using Sheenam.MVC.Models.Foundations.Guests.Exceptions;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Sheenam.MVC.Test.Unit.Foundations.Guests
@@ -98,11 +98,11 @@ namespace Sheenam.MVC.Test.Unit.Foundations.Guests
 
             this.loggingBrokerMock.Verify(broker =>
                 broker.LogError(It.Is(SameExceptionAs(
-                    expectedGuestValidationException))), 
+                    expectedGuestValidationException))),
                         Times.Once);
 
             this.storageBrokerMock.Verify(broker =>
-                broker.UpdateGuestAsync(It.IsAny<Guest>()), 
+                broker.UpdateGuestAsync(It.IsAny<Guest>()),
                     Times.Never);
 
             this.loggingBrokerMock.VerifyNoOtherCalls();

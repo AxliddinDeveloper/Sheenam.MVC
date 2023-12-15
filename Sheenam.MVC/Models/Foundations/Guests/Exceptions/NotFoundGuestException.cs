@@ -10,7 +10,7 @@ namespace Sheenam.MVC.Models.Foundations.Guests.Exceptions
 {
     public class NotFoundGuestException : Xeption
     {
-        public NotFoundGuestException(Guid guestId) 
+        public NotFoundGuestException(Guid guestId)
             : base(message: $"Couldn't find guest with id: {guestId}")
         { }
     }
