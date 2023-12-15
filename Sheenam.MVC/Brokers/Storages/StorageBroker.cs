@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Sheenam.MVC.Brokers.Storages
 {
-    public partial class StorageBroker : EFxceptionsContext, IStoragebroker
+    public partial class StorageBroker : EFxceptionsContext, IStorageBroker
     {
         private readonly IConfiguration configuration;
         private readonly IWebHostEnvironment webHostEnvironment;
