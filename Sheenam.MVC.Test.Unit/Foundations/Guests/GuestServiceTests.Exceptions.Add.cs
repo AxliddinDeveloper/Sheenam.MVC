@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Moq;
 using Sheenam.MVC.Models.Foundations.Guests;
 using Sheenam.MVC.Models.Foundations.Guests.Exceptions;
+using System;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -114,6 +115,43 @@ namespace Sheenam.MVC.Test.Unit.Foundations.Guests
             this.loggingBrokerMock.Verify(broker => broker.LogError(It.Is(
                 SameExceptionAs(expectedGuestDependencyValidationException))), 
                     Times.Once);
+
+            this.storageBrokerMock.Verify(broker =>
+                broker.InsertGuestAsync(It.IsAny<Guest>()), Times.Once);
+
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+            this.storageBrokerMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task ShouldThrowServiceExceptionOnAddIfServiceErrorOccursAndLogItAsync()
+        {
+            // given
+            Guest someGuest = CreateRandomGuest();
+            var serviceException = new Exception();
+
+            var failedGuestServiceException =
+                new FailedGuestServiceException(serviceException);
+
+            var expectedGuestServiceException =
+                new GuestServiceException(failedGuestServiceException);
+
+            this.storageBrokerMock.Setup(broker =>
+                broker.InsertGuestAsync(someGuest)).ThrowsAsync(expectedGuestServiceException);
+
+            // when
+            ValueTask<Guest> addGuestTask =
+                this.guestService.AddGuestAsync(someGuest);
+
+            GuestServiceException actualGuestServiceException =
+                await Assert.ThrowsAsync<GuestServiceException>(addGuestTask.AsTask);
+
+            // then
+            actualGuestServiceException.Should().BeEquivalentTo(expectedGuestServiceException);
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedGuestServiceException))), Times.Once);
 
             this.storageBrokerMock.Verify(broker =>
                 broker.InsertGuestAsync(It.IsAny<Guest>()), Times.Once);
