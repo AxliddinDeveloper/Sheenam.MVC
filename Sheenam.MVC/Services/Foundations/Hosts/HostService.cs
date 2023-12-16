@@ -25,7 +25,7 @@ namespace Sheenam.MVC.Services.Foundations.Hosts
 
         public async ValueTask<Host> AddHostAsync(Host host)
         {
-            throw new NotImplementedException();
+            return await this.storagebroker.InsertHostAsync(host);
         }
 
         public IQueryable<Host> RetrieveAllHosts()
