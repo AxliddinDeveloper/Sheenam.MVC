@@ -3,12 +3,15 @@
 // Powering True Leadership
 //===========================
 
+using System.Linq.Expressions;
+using System;
 using Moq;
 using Sheenam.MVC.Brokers.Loggings;
 using Sheenam.MVC.Brokers.Storages;
 using Sheenam.MVC.Models.Foundations.Hosts;
 using Sheenam.MVC.Services.Foundations.Hosts;
 using Tynamix.ObjectFiller;
+using Xeptions;
 
 namespace Sheenam.MVC.Test.Unit.Foundations.Hosts
 {
@@ -30,6 +33,9 @@ namespace Sheenam.MVC.Test.Unit.Foundations.Hosts
 
         private static Host CreateRandomHost() =>
             CreateHostFiller().Create();
+
+        private Expression<Func<Xeption, bool>> SameExceptionAs(Xeption expectedExceptoin) =>
+            actualException => actualException.SameExceptionAs(expectedExceptoin);
 
         private static Filler<Host> CreateHostFiller() =>
             new Filler<Host>();
