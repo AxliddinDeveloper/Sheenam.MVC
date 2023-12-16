@@ -45,5 +45,6 @@ namespace Sheenam.MVC.Test.Unit.Foundations.Hosts
             this.loggingBrokerMock.VerifyNoOtherCalls();
             this.storageBrokerMock.VerifyNoOtherCalls();
         }
+
     }
 }
