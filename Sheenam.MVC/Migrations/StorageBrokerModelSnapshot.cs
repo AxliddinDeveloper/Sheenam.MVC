@@ -43,6 +43,33 @@ namespace Sheenam.MVC.Migrations
 
                     b.ToTable("Guests");
                 });
+
+            modelBuilder.Entity("Sheenam.MVC.Models.Foundations.Hosts.Host", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Hosts");
+                });
 #pragma warning restore 612, 618
         }
     }

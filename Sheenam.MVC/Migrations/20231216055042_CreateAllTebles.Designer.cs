@@ -11,8 +11,8 @@ using Sheenam.MVC.Brokers.Storages;
 namespace Sheenam.MVC.Migrations
 {
     [DbContext(typeof(StorageBroker))]
-    [Migration("20231120102612_CreateAllTables")]
-    partial class CreateAllTables
+    [Migration("20231216055042_CreateAllTebles")]
+    partial class CreateAllTebles
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,6 +45,33 @@ namespace Sheenam.MVC.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Guests");
+                });
+
+            modelBuilder.Entity("Sheenam.MVC.Models.Foundations.Hosts.Host", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Hosts");
                 });
 #pragma warning restore 612, 618
         }

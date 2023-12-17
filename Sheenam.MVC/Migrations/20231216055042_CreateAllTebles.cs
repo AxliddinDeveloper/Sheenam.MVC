@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Sheenam.MVC.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateAllTables : Migration
+    public partial class CreateAllTebles : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -25,6 +25,21 @@ namespace Sheenam.MVC.Migrations
                 {
                     table.PrimaryKey("PK_Guests", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Hosts",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    FirstName = table.Column<string>(type: "TEXT", nullable: false),
+                    LastName = table.Column<string>(type: "TEXT", nullable: false),
+                    Email = table.Column<string>(type: "TEXT", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Hosts", x => x.Id);
+                });
         }
 
         /// <inheritdoc />
@@ -32,6 +47,9 @@ namespace Sheenam.MVC.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Guests");
+
+            migrationBuilder.DropTable(
+                name: "Hosts");
         }
     }
 }
