@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 using EFxceptions.Models.Exceptions;
 using FluentAssertions;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Moq;
+using Sheenam.MVC.Models.Foundations.Guests.Exceptions;
+using Sheenam.MVC.Models.Foundations.Guests;
 using Sheenam.MVC.Models.Foundations.Hosts;
 using Sheenam.MVC.Models.Foundations.Hosts.Exceptions;
 using Xunit;
@@ -83,6 +86,41 @@ namespace Sheenam.MVC.Test.Unit.Foundations.Hosts
 
             this.storageBrokerMock.Verify(broker => broker.InsertHostAsync(
                It.IsAny<Host>()), Times.Once);
+
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+            this.storageBrokerMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task ShouldThrowDependencyValidationExceptionOnAddIfDbConcurrencyErrorOccursAndLogItAsync()
+        {
+            // given
+            Host someHost = CreateRandomHost();
+            var dbUpdateConcurrencyException = new DbUpdateConcurrencyException();
+            var lockedHostException = new LockedHostException(dbUpdateConcurrencyException);
+
+            var expectedHostDependencyValidationException =
+                new HostDependencyValidationException(lockedHostException);
+
+            this.storageBrokerMock.Setup(broker =>
+                broker.InsertHostAsync(someHost)).ThrowsAsync(dbUpdateConcurrencyException);
+
+            // when
+            ValueTask<Host> addHostTask = this.hostService.AddHostAsync(someHost);
+
+            HostDependencyValidationException actualHostDependencyValidationException =
+                await Assert.ThrowsAsync<HostDependencyValidationException>(addHostTask.AsTask);
+
+            // then
+            actualHostDependencyValidationException.Should()
+                .BeEquivalentTo(expectedHostDependencyValidationException);
+
+            this.loggingBrokerMock.Verify(broker => broker.LogError(It.Is(
+                SameExceptionAs(expectedHostDependencyValidationException))),
+                    Times.Once);
+
+            this.storageBrokerMock.Verify(broker =>
+                broker.InsertHostAsync(It.IsAny<Host>()), Times.Once);
 
             this.loggingBrokerMock.VerifyNoOtherCalls();
             this.storageBrokerMock.VerifyNoOtherCalls();
