@@ -9,11 +9,10 @@ using System.Threading.Tasks;
 using Sheenam.MVC.Brokers.Loggings;
 using Sheenam.MVC.Brokers.Storages;
 using Sheenam.MVC.Models.Foundations.Hosts;
-using Sheenam.MVC.Models.Foundations.Hosts.Exceptions;
 
 namespace Sheenam.MVC.Services.Foundations.Hosts
 {
-    public class HostService : IHostService
+    public partial class HostService : IHostService
     {
         private readonly IStorageBroker storagebroker;
         private readonly ILoggingBroker loggingbroker;
@@ -24,25 +23,12 @@ namespace Sheenam.MVC.Services.Foundations.Hosts
             this.loggingbroker = loggingBroker;
         }
 
-        public async ValueTask<Host> AddHostAsync(Host host)
+        public ValueTask<Host> AddHostAsync(Host host) =>
+        TryCatch(async() =>
         {
-            try
-            {
-                if (host == null)
-                    throw new NullHostException();
-
-                return await this.storagebroker.InsertHostAsync(host);
-            }
-            catch (NullHostException nullHostException)
-            {
-                var hostValidationException = 
-                    new HostValidationException(nullHostException);
-
-                this.loggingbroker.LogError(hostValidationException);
-
-                throw hostValidationException;
-            }
-        }
+            ValidateHost(host);
+            return await this.storagebroker.InsertHostAsync(host);
+        });
 
         public IQueryable<Host> RetrieveAllHosts()
         {
