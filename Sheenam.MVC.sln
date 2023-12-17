@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34302.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sheenam.MVC", "Sheenam.MVC\Sheenam.MVC.csproj", "{E7A6277D-AD51-49D8-A32B-47BE584D3D7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sheenam.MVC", "Sheenam.MVC\Sheenam.MVC.csproj", "{E7A6277D-AD51-49D8-A32B-47BE584D3D7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sheenam.MVC.Test.Unit", "Sheenam.MVC.Test.Unit\Sheenam.MVC.Test.Unit.csproj", "{4CC1A664-426A-4D36-8C83-079879A0D176}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sheenam.MVC.Test.Unit", "Sheenam.MVC.Test.Unit\Sheenam.MVC.Test.Unit.csproj", "{4CC1A664-426A-4D36-8C83-079879A0D176}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sheenam.MVC.Infrastructure.Build", "Sheenam.MVC.Infrastructure.Build\Sheenam.MVC.Infrastructure.Build.csproj", "{E448751E-1A4D-4523-BAB5-11FE60DAD7DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sheenam.MVC.Infrastructure.Build", "Sheenam.MVC.Infrastructure.Build\Sheenam.MVC.Infrastructure.Build.csproj", "{E448751E-1A4D-4523-BAB5-11FE60DAD7DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

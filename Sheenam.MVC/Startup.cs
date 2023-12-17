@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Sheenam.MVC.Brokers.Loggings;
 using Sheenam.MVC.Brokers.Storages;
 using Sheenam.MVC.Services.Foundations.Guests;
+using Sheenam.MVC.Services.Foundations.Hosts;
 
 namespace Sheenam.MVC
 {
@@ -26,6 +27,7 @@ namespace Sheenam.MVC
             services.AddControllersWithViews();
             services.AddDbContext<StorageBroker>();
             services.AddTransient<IGuestService, GuestService>();
+            services.AddTransient<IHostService, HostService>();
             AddBrokers(services);
         }
 
