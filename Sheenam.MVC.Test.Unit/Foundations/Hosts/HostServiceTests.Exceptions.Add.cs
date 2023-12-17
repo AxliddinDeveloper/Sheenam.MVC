@@ -3,6 +3,7 @@
 // Powering True Leadership
 //===========================
 
+using System;
 using System.Threading.Tasks;
 using EFxceptions.Models.Exceptions;
 using FluentAssertions;
@@ -12,7 +13,6 @@ using Moq;
 using Sheenam.MVC.Models.Foundations.Hosts;
 using Sheenam.MVC.Models.Foundations.Hosts.Exceptions;
 using Xunit;
-using System;
 
 namespace Sheenam.MVC.Test.Unit.Foundations.Hosts
 {
@@ -139,7 +139,8 @@ namespace Sheenam.MVC.Test.Unit.Foundations.Hosts
                 new HostServiceException(failedHostServiceException);
 
             this.storageBrokerMock.Setup(broker =>
-                broker.InsertHostAsync(someHost)).ThrowsAsync(expectedHostServiceException);
+                broker.InsertHostAsync(someHost)).ThrowsAsync(
+                    expectedHostServiceException);
 
             // when
             ValueTask<Host> addHostTask =
