@@ -4,6 +4,7 @@
 //===========================
 
 using System.Threading.Tasks;
+using EFxceptions.Models.Exceptions;
 using Microsoft.Data.SqlClient;
 using Sheenam.MVC.Models.Foundations.Hosts;
 using Sheenam.MVC.Models.Foundations.Hosts.Exceptions;
@@ -39,6 +40,12 @@ namespace Sheenam.MVC.Services.Foundations.Hosts
 
                 throw CreateAndLogCriticalDependencyException(failedHostStorageException);
             }
+            catch (DuplicateKeyException duplicateKeyException)
+            {
+                var alreadyExistsHostException = new AlreadyExistsHostException(duplicateKeyException);
+
+                throw CreateAndDependencyValidationException(alreadyExistsHostException);
+            }
         }
 
         private HostValidationException CreateAndLogValidationException(Xeption exception)
@@ -55,6 +62,14 @@ namespace Sheenam.MVC.Services.Foundations.Hosts
             this.loggingbroker.LogCritical(hostDependencyException);
 
             return hostDependencyException;
+        }
+
+        private HostDependencyValidationException CreateAndDependencyValidationException(Xeption exception)
+        {
+            var hostDependencyValidationException = new HostDependencyValidationException(exception);
+            this.loggingbroker.LogError(hostDependencyValidationException);
+
+            return hostDependencyValidationException;
         }
     }
 }
