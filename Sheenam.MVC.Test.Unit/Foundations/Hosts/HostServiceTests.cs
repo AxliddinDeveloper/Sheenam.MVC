@@ -32,6 +32,8 @@ namespace Sheenam.MVC.Test.Unit.Foundations.Hosts
                 storageBroker: this.storageBrokerMock.Object,
                 loggingBroker: this.loggingBrokerMock.Object);
         }
+        private static string GetRandomString() =>
+            new MnemonicString().GetValue();
 
         private static Host CreateRandomHost() =>
             CreateHostFiller().Create();
