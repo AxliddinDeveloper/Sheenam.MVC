@@ -31,10 +31,6 @@ namespace Sheenam.MVC.Services.Foundations.Hosts
             {
                 throw CreateAndLogValidationException(invalidHostException);
             }
-            catch (NotFoundHostException notFoundhostException)
-            {
-                throw CreateAndLogValidationException(notFoundhostException);
-            }
             catch (SqlException sqlException)
             {
                 var failedHostStorageException = new FailedHostStorageException(sqlException);
