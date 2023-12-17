@@ -12,6 +12,8 @@ using Sheenam.MVC.Models.Foundations.Hosts;
 using Sheenam.MVC.Services.Foundations.Hosts;
 using Tynamix.ObjectFiller;
 using Xeptions;
+using Microsoft.Data.SqlClient;
+using System.Runtime.Serialization;
 
 namespace Sheenam.MVC.Test.Unit.Foundations.Hosts
 {
@@ -36,6 +38,9 @@ namespace Sheenam.MVC.Test.Unit.Foundations.Hosts
 
         private Expression<Func<Xeption, bool>> SameExceptionAs(Xeption expectedExceptoin) =>
             actualException => actualException.SameExceptionAs(expectedExceptoin);
+
+        private static SqlException CreateSqlException() =>
+            (SqlException)FormatterServices.GetUninitializedObject(typeof(SqlException));
 
         private static Filler<Host> CreateHostFiller() =>
             new Filler<Host>();
